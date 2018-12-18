@@ -26,7 +26,6 @@ namespace TripStyle.Data
                         string Firstname = Firstname = Faker.Name.First();
                         User m = new User
                         {
-                            UserId = x,
                             RoleId = 1,
                             Firstname = Firstname,
                             Lastname = Faker.Name.Last(),
@@ -50,14 +49,12 @@ namespace TripStyle.Data
                     {
                         Role r = new Role
                         {
-                            RoleId = 1,
                             Name = "Customer",
                             Description = "The Customer is King"
 
                         };
                         Role r2 = new Role
                         {
-                            RoleId = 2,
                             Name = "Admin",
                             Description = "The Admin is King"
 
@@ -77,7 +74,6 @@ namespace TripStyle.Data
                     {
                         Category c = new Category
                         {
-                            CategoryId = w,
                             Name = ClothingCategories[w]
                         };
                         db.Categories.Add(c);
@@ -97,10 +93,12 @@ namespace TripStyle.Data
                     String[] Season = { "Summer", "Winter", "Autumn", "Spring" };
                     while (y < 200)
                     {
+
+                        var CategoryId = rnd.Next(2, 6);
+                        Console.WriteLine(CategoryId);
                         string RealSize = Size[new Random().Next(0, Size.Length)];
                         Product p = new Product
                         {
-                            ProductId = y,
                             Name = Faker.Name.First() + " " + Clothingname[pp] + " " + RealSize,
                             Make = Make[new Random().Next(0, Make.Length)],
                             Price = rnd.Next(5, 100).ToString(),
@@ -109,7 +107,7 @@ namespace TripStyle.Data
                             Color = Color[new Random().Next(0, Color.Length)],
                             Region = Region[new Random().Next(0, Region.Length)],
                             Season = Season[new Random().Next(0, Season.Length)],
-                            Category = db.Categories.Where(c => c.CategoryId == rnd.Next(2, 6)).FirstOrDefault()
+                            Category = db.Categories.Where(c => c.CategoryId == CategoryId).FirstOrDefault()
                         };
                         db.Products.Add(p);
                         db.SaveChanges();
@@ -127,7 +125,6 @@ namespace TripStyle.Data
                     {
                         Image i = new Image
                         {
-                            ImageId = z,
                             Url = UrlsCats[rnd.Next(0, UrlsCats.Length)],
                             Description = "Picture of Cats",
                             Order = rnd.Next(1, 3).ToString(),
@@ -149,7 +146,6 @@ namespace TripStyle.Data
                     {
                         TripStyle.Api.Models.Address a = new TripStyle.Api.Models.Address
                         {
-                            AddressId = b,
                             Type = TypeAdresses[rnd.Next(0, TypeAdresses.Length)],
                             Street = Faker.Address.StreetName(),
                             City = Faker.Address.City(),
