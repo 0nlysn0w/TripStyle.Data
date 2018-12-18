@@ -122,7 +122,7 @@ namespace TripStyle.Data
                 void CreateImages()
                 {
                     int z = 1;
-                    string[] UrlsCats = { "https://placekitten.com/200/300", "http://placekitten.com/g/200/300", "http://placebear.com/300/200" };
+                    string[] UrlsCats = { "https://placekitten.com/200/200", "http://placekitten.com/g/200/200", "http://placebear.com/200/200" };
                     while (z < 200)
                     {
                         Image i = new Image
