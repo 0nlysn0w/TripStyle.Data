@@ -78,14 +78,12 @@ namespace TripStyle.Data
             {
                 new Role
                 {
-                    RoleId = 1,
                     Name = "Customer",
                     Description = "The Customer is King"
 
                 },
                 new Role
                 {
-                    RoleId = 2,
                     Name = "Admin",
                     Description = "The Admin is King"
 
