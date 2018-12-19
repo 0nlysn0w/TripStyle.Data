@@ -8,7 +8,8 @@
   <ItemGroup> 
       <PackageReference Include="Faker.net" Version="1.0.3" /> 
       <PackageReference Include="microsoft.entityframeworkcore" Version="2.1.4" /> 
-      <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="2.1.4" />
+      <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="2.1.4" /> 
+      <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.1.4" />
       <Reference Include="Tripstyle.Api">
         <HintPath>..\TripStyle.Api\obj\Debug\netcoreapp2.1\Tripstyle.Api.dll</HintPath>
       </Reference>
