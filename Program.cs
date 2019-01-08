@@ -9,26 +9,26 @@ namespace TripStyle.Data
 {
     class Program
     {
-        static string[] ProductCategory = new string[] { "shirt", "coat", "skirt", "dress", "suit", "underwear", "swimsuit", "shirt", "coat" };
+        static string[] ProductCategory = new string[] { "Skirt", "Dress", "Suit", "Underwear", "Swimsuit", "Shirt", "Coat" };
         static string[] ProductName = new string[] { 
             "Apron",
             "Baldric",
             "Basque",
             "Bathing suit",
             "Bathrobe",
-            "blouse",
-            "body",
-            "body stocking",
-            "bodysuit",
-            "cardigan or (informal) cardie or cardy",
-            "chaps",
-            "chausses",
-            "chador",
-            "coat",
-            "coatee",
-            "codpiece",
-            "cummerbund",
-            "dolman" 
+            "Blouse",
+            "Body",
+            "Body Stocking",
+            "Bodysuit",
+            "Cardigan ",
+            "Chaps",
+            "Chausses",
+            "Chador",
+            "Coat",
+            "Coatee",
+            "Codpiece",
+            "Cummerbund",
+            "Dolman" 
          };
         static string[] ProductDescription = new string[] { 
             "a protective or sometimes decorative or ceremonial garment worn over the front of the body and tied around the waist",
@@ -58,7 +58,6 @@ namespace TripStyle.Data
             var categories = CreateCategories();
             var users = CreateUsers(100);
             var products = CreateProducts(200, categories);
-            var addresses = CreateAddresses(users);
 
             using (var db = new TripStyleContext())
             {
@@ -66,7 +65,6 @@ namespace TripStyle.Data
                 db.Categories.AddRange(categories);
                 db.Users.AddRange(users);
                 db.Products.AddRange(products);
-                db.Addresses.AddRange(addresses);
                 db.SaveChanges();
             }
 
@@ -110,13 +108,16 @@ namespace TripStyle.Data
 
                 return new User
                 {
-                    RoleId = 1,
                     Firstname = Firstname,
                     Lastname = Lastname,
                     Gender = Gender[random.Next(0, Gender.Length)],
                     Email = Email,
                     Phonenumber = random.Next(600000000, 699999999).ToString(),
-                    Password = random.Next(1000, 100000).ToString()
+                    Password = random.Next(1000, 100000).ToString(),
+                    Street = Faker.Address.StreetName(),
+                    City = Faker.Address.City(),
+                    Country = Faker.Address.Country(),
+                    RoleId = 1
                 };
             }).ToList();
         }
@@ -125,7 +126,7 @@ namespace TripStyle.Data
         {
             string[] Size = { "XS", "S", "M", "L", "XL" };
             string[] Make = { "Nike", "Meindl", "Atomic", "Protest" };
-            string[] Color = { "Black", "Purple", "White", "Yellow", "Pink", "Blue", "Red" };
+            string[] Color = { "Black", "Purple", "White", "Yellow", "Pink", "Blue", "Red", "Greendotne" };
             string[] Region = { "Europe", "Asia", "Africa", "North America", "South America", "Ocania" };
             string[] Season = { "Summer", "Winter", "Autumn", "Spring" };
             string[] Image = { "https://placekitten.com/200/200", "http://placekitten.com/g/200/200", "http://placebear.com/200/200" };
@@ -135,7 +136,7 @@ namespace TripStyle.Data
                 {
                     Name = ProductName[random.Next(0, ProductName.Length)],
                     Make = Make[random.Next(0, Make.Length)],
-                    Price = random.Next(5, 200).ToString(),
+                    Price = random.Next(5, 200),
                     Size = Size[random.Next(0, Size.Length)],
                     Color = Color[random.Next(0, Color.Length)],
                     Region = Region[random.Next(0, Region.Length)],
@@ -145,22 +146,5 @@ namespace TripStyle.Data
                 };
             }).ToList();
         }
-
-        public static List<TripStyle.Api.Models.Address> CreateAddresses(List<User> users)
-        {
-            string[] AddressType = { "FactuurAddress", "BezorgAddress" };
-
-            return Enumerable.Range(0, users.Count).Select((index) => {
-                return new TripStyle.Api.Models.Address
-                {
-                    Type = AddressType[random.Next(0, AddressType.Length)],
-                    Street = Faker.Address.StreetName(),
-                    City = Faker.Address.City(),
-                    Country = Faker.Address.Country(),
-                    User = users[index]
-                };
-            }).ToList();
-        }
-
     }
 }
