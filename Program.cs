@@ -129,7 +129,6 @@ namespace TripStyle.Data
             string[] Color = { "Black", "Purple", "White", "Yellow", "Pink", "Blue", "Red", "Greendotne" };
             string[] Region = { "Europe", "Asia", "Africa", "North America", "South America", "Ocania" };
             string[] Season = { "Summer", "Winter", "Autumn", "Spring" };
-            string[] Image = { "https://placekitten.com/200/200", "http://placekitten.com/g/200/200", "http://placebear.com/200/200" };
 
             return Enumerable.Range(0, NumberOfProducts).Select(_ => {
                 return new Product
@@ -142,7 +141,8 @@ namespace TripStyle.Data
                     Region = Region[random.Next(0, Region.Length)],
                     Season = Season[random.Next(0, Season.Length)],
                     Category = categories[random.Next(0, categories.Count -1)],
-                    Image = Image[random.Next(0, Image.Length)]
+                    Image = "https://picsum.photos/500?image=" + random.Next(0,500),
+                    Stock = 10
                 };
             }).ToList();
         }
